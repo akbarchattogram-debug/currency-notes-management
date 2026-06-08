@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BB Note Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #006747;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .box {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #006747;
+            margin-bottom: 10px;
+        }
+        
+        .success {
+            color: green;
+            font-size: 50px;
+        }
+        
+        button {
+            background: #006747;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        button:hover {
+            background: #004d33;
+        }
+        
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="success">🏦</div>
+        <h1>Bangladesh Bank</h1>
+        <h2>Currency Note Management System</h2>
+        <p>Day 1 Setup - Testing if everything works</p>
+        
+        <button onclick="testServer()">🔍 Test Server Connection</button>
+        
+        <div id="result"></div>
+        <div id="error" style="color: red; margin-top: 10px;"></div>
+        
+        <p style="margin-top: 20px; color: #666; font-size: 14px;">
+            ✅ Server: Running on port 3000<br>
+            ✅ Project structure created
+        </p>
+    </div>
+    
+    <script>
+        async function testServer() {
+            const resultDiv = document.getElementById('result');
+            const errorDiv = document.getElementById('error');
+            
+            resultDiv.style.display = 'none';
+            errorDiv.textContent = '';
+            
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = '⏳ Testing connection...';
+            
+            try {
+                const response = await fetch('/api/test');
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <strong>✅ Success!</strong><br>
+                    Message: ${data.message}<br>
+                    Server Time: ${data.time}<br>
+                    <small>API is working perfectly</small>
+                `;
+            } catch (error) {
+                errorDiv.textContent = '❌ Error: Cannot connect to server. Make sure server is running!';
+                resultDiv.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

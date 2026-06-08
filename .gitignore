@@ -1,0 +1,14 @@
+# This file tells Git which files NOT to upload to GitHub
+
+# Don't upload installed packages (too big)
+node_modules/
+
+# Don't upload sensitive information
+.env
+
+# Don't upload system files
+.DS_Store
+Thumbs.db
+
+# Don't upload log files
+*.log
